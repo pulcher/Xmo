@@ -22,5 +22,5 @@ RUN apt install python3-colcon-common-extensions -y
 
 #COPY ros2_entrypoint.sh /root/.
 #ENTRYPOINT ["/root/ros2_entrypoint.sh"]
-CMD ["bash"]
+#CMD ["bash"]
 

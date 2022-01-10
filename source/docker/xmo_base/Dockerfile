@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
-RUN apt update && apt install -y curl gnupg2 lsb-release git
+RUN apt update && apt install -y curl gnupg2 lsb-release git vim
 RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
 
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
@@ -17,7 +17,7 @@ WORKDIR /root/dev_ws
 RUN apt-get install python3-rosdep -y
 RUN rosdep init
 RUN rosdep update
-RUN rosdep install -i --from-path src --rosdistro foxy -y
+RUN rosdep install -i --from-path src --rosdistro galactic -y
 RUN apt install python3-colcon-common-extensions -y
 
 #COPY ros2_entrypoint.sh /root/.

@@ -10,7 +10,16 @@ My implementation based on work from the Exomy 3D printed rover project
 1. Download 20.04 Server LTS https://ubuntu.com/download/raspberry-pi
 1. Install ubuntu using the Raspberry Pi Imager.  Here is a link to the official Ubuntu site with a walk-through https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview  I went ahead and installed the minimal desktop after getting the RPI on my local network.
 1. Install Docker: https://linuxhint.com/install_docker_raspberry_pi-2/
+1. Login docker
+1. Build the base and the primary
+```
+$ docker build -t xmo_base:latest ~/repos/Xmo/source/docker/xmo_base
+$ docker build -t xmo:latest ~/repos/Xmo/source/docker/xmo
+```
 1.
+
+# example of communicating between ros2 instances
+- https://husarnet.com/blog/ros2-docker
 
 
 # Development Environment

@@ -27,31 +27,27 @@ You will probably want to do the following on desktop where you have multiple te
 1. Get a shell on the RPI
 2. Execute the following command:
 ```
-$ docker run --rm -it --name ros-test1 -h ros2-1 xmo:latest
+$ docker run --rm -it --name ros-test1 -h ros2-1 --network="host" --pid=host --privileged xmo:latest
 ```
 - you should now have a prompt in the ROS2 contianer.
 3.  Get another shell on the RPI.
 4.  Execute the follwoing command:
  ```
- $ docker run --rm -it --name ros-test2 -h ros2-2 xmo:latest
+ $ docker run --rm -it --name ros-test2 -h ros2-2 --network="host" --pid=host --privileged xmo:latest
  ```
  5. In one of the terminals execute the following command:
-```
+```bash
 $ ros2 run demo_nodes_cpp talker
 ```
 6. In the other terminal excute the following command:
-```
+```bash
 $ ros2 run demo_nodes_py listener
 ```
 You should now have a **talker** and the **listener** communicating with each other.  You can now exit both terminals by whichever means you desire.
 
 
-# example of communicating between ros2 instances
-- https://husarnet.com/blog/ros2-docker
-
-
 ## Windows Setup
-1. Follow the install using the guide from ros.org [Installing ROS 2 on Windows](https://docs.ros.org/en/galactic/Installation/Windows-Install-Binary.html#installing-ros-2-on-windows)
+Follow the install using the guide from ros.org [Installing ROS 2 on Windows](https://docs.ros.org/en/galactic/Installation/Windows-Install-Binary.html#installing-ros-2-on-windows)
 
 I chose to put the base install in __c:\dev\ros2_galactic__.  I had some space issues and installed the __Qt__ libraries on __d:\Qt__.
 
@@ -62,6 +58,11 @@ I solved the error with the following environment settings:
 ```
 QT_QPA_PLATFORM_PLUGIN_PATH = C:\dev\ros2_galactic\bin\platforms
 Qt5_DIR = D:\Qt\5.15.0\msvc2019_64
+```
+
+Update your environment with the following:
+```
+ROS_DOMAIN_ID = 27
 ```
 
 

@@ -1,8 +1,12 @@
-FROM pulcher/xmo_base:latest
-#FROM xmo_base:latest
+#FROM pulcher/xmo_base:latest
+FROM xmo_base:latest
 
 WORKDIR /root
 
 COPY ./entrypoint.sh /root
-#ENTRYPOINT [ "/root/entrypoint.sh" ]
-CMD [ "bash" ]
+
+#USER 0
+#ENTRYPOINT /usr/bin/bash -c /root/entrypoint.sh
+#ENTRYPOINT [ "/usr/bin/bash", "-c", "/root/entrypoint.sh" ]
+ENTRYPOINT [ "/root/entrypoint.sh" ]
+#CMD [ "bash" ]

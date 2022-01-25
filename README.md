@@ -6,6 +6,7 @@ My implementation based on work from the Exomy 3D printed rover project
 - 128 GB SD card
 - Ubuntu 20.04 LTS
 - ROS2 Galactic 
+- Logitech F710 gamepad
 
 # Rapspberry Pi Setup
 1. Download 20.04 Server LTS https://ubuntu.com/download/raspberry-pi
@@ -65,7 +66,6 @@ Update your environment with the following:
 ROS_DOMAIN_ID = 27
 ```
 
-
 # Development Environment
 
 ## Docker build
@@ -83,3 +83,7 @@ sudo apt
 
 Source for this: https://www.linux.com/topic/desktop/how-install-docker-ce-your-desktop/
 and Preference to this link https://medium.com/@mikejohanson/running-docker-ce-in-wsl2-ed74dac32782
+
+# Building/Dev-ing the thing.
+## Joy
+[Joy Node Reference](http://wiki.ros.org/joy)

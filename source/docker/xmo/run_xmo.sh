@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker run 
+docker run \
     --rm \
     -it \
     --name xmo \

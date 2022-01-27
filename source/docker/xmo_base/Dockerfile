@@ -11,15 +11,15 @@ RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/r
 RUN apt update
 RUN DEBIAN_FRONTEND=noninteractive apt install -y ros-galactic-desktop
 
-WORKDIR /root/dev_ws/src
-RUN git clone https://github.com/ros/ros_tutorials.git -b galactic-devel
-WORKDIR /root/dev_ws
+#WORKDIR /root/dev_ws/src
+#RUN git clone https://github.com/ros/ros_tutorials.git -b galactic-devel
+#WORKDIR /root/dev_ws
 
-RUN apt-get install python3-rosdep -y
-RUN rosdep init
-RUN rosdep update
-RUN rosdep install -i --from-path src --rosdistro galactic -y
-RUN apt install python3-colcon-common-extensions -y
+#RUN apt-get install python3-rosdep -y
+#RUN rosdep init
+#RUN rosdep update
+#RUN rosdep install -i --from-path src --rosdistro galactic -y
+#RUN apt install python3-colcon-common-extensions -y
 
 #COPY ros2_entrypoint.sh /root/.
 #ENTRYPOINT ["/root/ros2_entrypoint.sh"]

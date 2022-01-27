@@ -1,0 +1,10 @@
+/root/dev_ws/src/build/my_package/CMakeFiles/install/strip.dir
+/root/dev_ws/src/build/my_package/CMakeFiles/install/local.dir
+/root/dev_ws/src/build/my_package/CMakeFiles/install.dir
+/root/dev_ws/src/build/my_package/CMakeFiles/list_install_components.dir
+/root/dev_ws/src/build/my_package/CMakeFiles/rebuild_cache.dir
+/root/dev_ws/src/build/my_package/CMakeFiles/edit_cache.dir
+/root/dev_ws/src/build/my_package/CMakeFiles/test.dir
+/root/dev_ws/src/build/my_package/CMakeFiles/my_package_uninstall.dir
+/root/dev_ws/src/build/my_package/CMakeFiles/my_node.dir
+/root/dev_ws/src/build/my_package/CMakeFiles/uninstall.dir

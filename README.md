@@ -17,8 +17,8 @@ My implementation based on work from the Exomy 3D printed rover project
 4. Login to docker: ```$ docker login ```
 5. Build the base and the primary 
 ```
-$ docker build -t xmo_base:latest ~/repos/Xmo/source/docker/xmo_base
-$ docker build -t xmo:latest ~/repos/Xmo/source/docker/xmo
+docker build -t xmo_base:latest ~/repos/Xmo/source/docker/xmo_base
+docker build -t xmo:latest ~/repos/Xmo/source/docker/xmo
 ```
 
 - These should be available as a public repo on docker hub at some point in this with a release.
@@ -28,21 +28,21 @@ You will probably want to do the following on desktop where you have multiple te
 1. Get a shell on the RPI
 2. Execute the following command:
 ```
-$ docker run --rm -it --name ros-test1 -h ros2-1 --network="host" --pid=host --privileged xmo:latest
+docker run --rm -it --name ros-test1 -h ros2-1 --network="host" --pid=host --privileged xmo:latest
 ```
 - you should now have a prompt in the ROS2 contianer.
 3.  Get another shell on the RPI.
 4.  Execute the follwoing command:
  ```
- $ docker run --rm -it --name ros-test2 -h ros2-2 --network="host" --pid=host --privileged xmo:latest
+ docker run --rm -it --name ros-test2 -h ros2-2 --network="host" --pid=host --privileged xmo:latest
  ```
  5. In one of the terminals execute the following command:
 ```bash
-$ ros2 run demo_nodes_cpp talker
+ros2 run demo_nodes_cpp talker
 ```
 6. In the other terminal excute the following command:
 ```bash
-$ ros2 run demo_nodes_py listener
+ros2 run demo_nodes_py listener
 ```
 You should now have a **talker** and the **listener** communicating with each other.  You can now exit both terminals by whichever means you desire.
 

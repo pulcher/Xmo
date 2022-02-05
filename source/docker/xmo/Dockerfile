@@ -13,6 +13,8 @@ RUN rosdep update
 RUN rosdep install -i --from-path src --rosdistro galactic -y
 RUN apt install python3-colcon-common-extensions -y
 
+RUN apt clean
+
 WORKDIR /root
 
 COPY ./entrypoint.sh /root

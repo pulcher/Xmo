@@ -14,6 +14,7 @@ RUN apt update && apt install -y \
     usbutils \
     i2c-tools \
     libi2c-dev \
+    python3-rpi.gpio \
     python3-pip
 
 RUN pip3 install -r requirements.txt

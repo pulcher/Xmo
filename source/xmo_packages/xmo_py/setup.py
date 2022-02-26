@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'servos = xmo_py.servo_driver:main',
+            'configuration = xmo_py.configuration_service:main'
         ],
     },
 )

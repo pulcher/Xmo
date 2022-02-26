@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'servos = xmo_py.servo_driver:main',
         ],
     },
 )

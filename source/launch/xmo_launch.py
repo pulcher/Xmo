@@ -1,5 +1,7 @@
+from http.server import executable
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from adafruit_servokit import ServoKit
 
 def generate_launch_description():
     return LaunchDescription([
@@ -7,6 +9,11 @@ def generate_launch_description():
             package='joy',
             executable='joy_node',
             name='joystick'
+        ),
+        Node(
+            package='xmo_py',
+            executable='servos',
+            name='servos_node'
         ),
         Node(
             package='teleop_twist_joy',

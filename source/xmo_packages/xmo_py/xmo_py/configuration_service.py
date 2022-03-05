@@ -1,4 +1,4 @@
-from xmo_interfaces.srv import AddThreeInts
+from xmo_interfaces.srv import GetConfiguration
 
 import rclpy
 from rclpy.node import Node
@@ -7,11 +7,17 @@ class ConfigurationService(Node):
 
     def __init__(self):
         super().__init__('configuration_service')
-        self.srv = self.create_service(AddThreeInts, 'add_three_ints', self.add_three_ints_callback)
+        self.srv = self.create_service(GetConfiguration, 'get_configuration', self.get_configuration_callback)
 
-    def add_three_ints_callback(self, request, response):
-        response.sum = request.a + request.b + request.c
-        self.get_logger().info('Incoming request\na: %d b: %d c: %d' % (request.a, request.b, request.c))
+    # def add_three_ints_callback(self, request, response):
+        # response.sum = request.a + request.b + request.c
+        # self.get_logger().info('Incoming request\na: %d b: %d c: %d' % (request.a, request.b, request.c))
+
+        # return response
+
+    def get_configuration_callback(self, request, response):
+        response.current_configuration = "{name: blah}"
+        self.get_logger().info('Incoming request\nsection_name %s' % (request.section_name))
 
         return response
 

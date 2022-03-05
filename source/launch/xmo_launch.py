@@ -36,5 +36,10 @@ def generate_launch_description():
                 {'scale_angular.yaw': 1.0}
             ],
             arguments=['--ros-args', '--log-level', 'info']
+        ),
+        Node(
+            package='xmo_py',
+            executable='configuration',
+            name='configuration_service'
         )
     ])

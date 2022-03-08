@@ -1,0 +1,34 @@
+digraph xmo {
+    gps_node -> navigation_node
+    imu_node -> navigation_node
+    navigation_node -> behavior_node
+
+    collision_avoid -> behavior_node
+    
+    camera_node -> image_recognizer
+
+    image_recognizer -> behavior_node
+
+    joy_node -> behavior_node
+
+    behavior_node -> teleop_twist_node
+
+    teleop_twist_node -> driver_node
+
+    driver_node -> ackerman_math_node
+    driver_node -> spin_math_node
+    driver_node -> crab_math_node
+
+    ackerman_math_node -> servo_node_0
+    ackerman_math_node -> servo_node_1
+    ackerman_math_node -> servo_node_2
+
+    spin_math_node -> servo_node_0
+    spin_math_node -> servo_node_1
+    spin_math_node -> servo_node_2
+
+    crab_math_node -> servo_node_0
+    crab_math_node -> servo_node_1
+    crab_math_node -> servo_node_2
+
+}

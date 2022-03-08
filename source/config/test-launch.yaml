@@ -1,0 +1,4 @@
+test_section:
+  action: thing2
+  name: other_thing
+  

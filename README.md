@@ -87,3 +87,8 @@ and Preference to this link https://medium.com/@mikejohanson/running-docker-ce-i
 # Building/Dev-ing the thing.
 ## Joy
 [Joy Node Reference](http://wiki.ros.org/joy)
+
+
+# some useful links that need a shoutout when we can
+### Why a parameter service ain't right with ROS2
+[YAML for parameters](https://roboticsbackend.com/ros2-yaml-params/#From_a_launch_file)

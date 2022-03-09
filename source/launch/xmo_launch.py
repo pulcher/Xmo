@@ -1,7 +1,15 @@
+import os
+from ament_index_python.packages import get_package_share_directory
 from http.server import executable
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from adafruit_servokit import ServoKit
+
+servo_driver_config = os.path.join(
+    get_package_share_directory('xmo_py'),
+        'config',
+        'servo_driver.yaml'
+    )
 
 def generate_launch_description():
     return LaunchDescription([
@@ -12,8 +20,9 @@ def generate_launch_description():
         ),
         Node(
             package='xmo_py',
-            executable='servos',
-            name='servos_node'
+            executable='servo_driver',
+            name='servo_driver_node',
+            parameters=[servo_driver_config]
         ),
         Node(
             package='teleop_twist_joy',

@@ -1,0 +1,9 @@
+servo_driver_node:
+  ros__parameters:
+    number_channels: 16
+    subscription_nodes: [
+      steering,
+      thottle
+    ]
+
+  

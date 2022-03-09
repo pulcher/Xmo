@@ -12,7 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
+        (os.path.join('share', package_name, 'config'), glob('../../config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -23,7 +23,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'servos = xmo_py.servo_driver:main',
+            'servo_driver = xmo_py.servo_driver:main',
             'configuration = xmo_py.configuration_service:main'
         ],
     },

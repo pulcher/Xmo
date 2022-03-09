@@ -1,4 +1,7 @@
 digraph xmo {
+    labelloc="t"
+    label="Xmo node layout";
+
     gps_node -> navigation_node
     imu_node -> navigation_node
     navigation_node -> behavior_node
@@ -31,4 +34,8 @@ digraph xmo {
     crab_math_node -> servo_node_1
     crab_math_node -> servo_node_2
 
+    servo_driver[label="motor_controller\nparams:\l\n[nodes_names_to_subscribe]\r\nnumber_channels\r\n"]
+    servo_node_0 -> servo_driver
+    servo_node_1 -> servo_driver
+    servo_node_2 -> servo_driver
 }

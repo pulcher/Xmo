@@ -3,7 +3,6 @@ import rclpy
 from rclpy.node import Node
 from adafruit_servokit import ServoKit
 
-from geometry_msgs.msg import Twist
 from xmo_interfaces.msg import ServoPosition
 
 
@@ -29,12 +28,6 @@ class ServoDriver(Node):
                 self.listener_callback,
                 10)
 
-# need to loop through the subscription nodes here.
-        # self.subscription = self.create_subscription(
-        #     ServoPosition,
-        #     'lf_servo',
-        #     self.listener_callback,
-        #     10)
         self.subscription  # prevent unused variable warning
 
         self.get_logger().info("channels: %d, subscription_nodes: %s" %

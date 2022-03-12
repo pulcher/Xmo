@@ -1,0 +1,10 @@
+lf_steer_node:
+  ros__parameters:
+    channel: 0
+    servo_type: standard
+lf_drive_node:
+  ros__parameters:
+    channel: 1
+    servo_type: continuous
+
+  

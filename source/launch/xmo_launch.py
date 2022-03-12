@@ -11,6 +11,12 @@ servo_driver_config = os.path.join(
         'servo_driver.yaml'
     )
 
+servo_node_config = os.path.join(
+    get_package_share_directory('xmo_py'),
+        'config',
+        'servo_node.yaml'
+    )
+
 def generate_launch_description():
     return LaunchDescription([
         Node(
@@ -48,7 +54,14 @@ def generate_launch_description():
         ),
         Node(
             package='xmo_py',
-            executable='configuration',
-            name='configuration_service'
+            executable='servo_node',
+            name='lf_steer_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='lf_drive_node',
+            parameters=[servo_node_config]
         )
     ])

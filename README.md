@@ -92,3 +92,5 @@ and Preference to this link https://medium.com/@mikejohanson/running-docker-ce-i
 # some useful links that need a shoutout when we can
 ### Why a parameter service ain't right with ROS2
 [YAML for parameters](https://roboticsbackend.com/ros2-yaml-params/#From_a_launch_file)
+
+[Naming Conventions](https://pep8.org/#prescriptive-naming-conventions)

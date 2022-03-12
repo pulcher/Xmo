@@ -4,6 +4,7 @@ from rclpy.node import Node
 from adafruit_servokit import ServoKit
 
 from geometry_msgs.msg import Twist
+from xmo_interfaces.msg import ServoPosition
 
 
 class ServoDriver(Node):
@@ -21,12 +22,19 @@ class ServoDriver(Node):
         param_number_channels = self.get_parameter('number_channels')
         param_subscription_nodes = self.get_parameter('subscription_nodes')
 
+        for topicName in param_subscription_nodes.value:
+            self.subscription = self.create_subscription(
+                ServoPosition,
+                topicName,
+                self.listener_callback,
+                10)
+
 # need to loop through the subscription nodes here.
-        self.subscription = self.create_subscription(
-            Twist,
-            'cmd_vel',
-            self.listener_callback,
-            10)
+        # self.subscription = self.create_subscription(
+        #     ServoPosition,
+        #     'lf_servo',
+        #     self.listener_callback,
+        #     10)
         self.subscription  # prevent unused variable warning
 
         self.get_logger().info("channels: %d, subscription_nodes: %s" %
@@ -36,9 +44,9 @@ class ServoDriver(Node):
         self.kit = ServoKit(channels=param_number_channels.value)
 
     def listener_callback(self, msg):
-        angle = float(msg.linear.x) + 90
+        angle = float(msg.angle) + 90
         # self.get_logger().info('I heard: "%s"' % angle)
-        self.kit.servo[0].angle = angle
+        self.kit.servo[msg.channel].angle = angle
 
 
 def main(args=None):

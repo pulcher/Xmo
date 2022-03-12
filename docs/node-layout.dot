@@ -34,7 +34,7 @@ digraph xmo {
     crab_math_node -> servo_node_1
     crab_math_node -> servo_node_2
 
-    servo_driver[label="motor_controller\nparams:\l\n[nodes_names_to_subscribe]\r\nnumber_channels\r\n"]
+    servo_driver[label="servo_driver\nparams:\l\n[nodes_names_to_subscribe]\r\nnumber_channels\r\n"]
     servo_node_0 -> servo_driver
     servo_node_1 -> servo_driver
     servo_node_2 -> servo_driver

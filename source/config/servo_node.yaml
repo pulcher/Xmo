@@ -2,9 +2,20 @@ lf_steer_node:
   ros__parameters:
     channel: 0
     servo_type: standard
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      cmd_servo
+    ]
 lf_drive_node:
   ros__parameters:
     channel: 1
     servo_type: continuous
-
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      cmd_servo
+    ]
   

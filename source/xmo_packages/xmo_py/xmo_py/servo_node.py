@@ -15,12 +15,20 @@ class ServoNode(Node):
             namespace='',
             parameters=[
                 ('channel', -1),
-                ('servo_type', 'bogus')
+                ('servo_type', 'bogus'),
+                ('min', 0),
+                ('max', 180),
+                ('neutral', 90),
+                ('subscription_nodes', ['test'])
             ])
 
         self_name = self.get_name()
         param_channel = self.get_parameter('channel')
         param_servo_type = self.get_parameter('servo_type')
+        param_min = self.get_parameter('min')
+        param_max = self.get_parameter('max')
+        param_neutral = self.get_parameter("neutral")
+        param_subscription_nodes = self.get_parameter('subscription_nodes',)
 
         if (param_channel.value < 0):
             raise Exception("Sorry, no channels below zero")
@@ -31,17 +39,34 @@ class ServoNode(Node):
         publishing_topic = self_name + '_pub'
         self.create_publisher(ServoPosition, publishing_topic, 10)
 
-        # self.subscription  # prevent unused variable warning
+        for topicName in param_subscription_nodes.value:
+            self.subscription = self.create_subscription(
+                ServoPosition,
+                topicName,
+                self.listener_callback,
+                10)
+        self.subscription  # prevent unused variable warning
 
         self.get_logger().info("self_name: %s, channel: %d, servo_type: %s" %
                            (self_name,
                             param_channel.value,
                             str(param_servo_type.value),))
 
-    # def listener_callback(self, msg):
-    #     angle = float(msg.angle) + 90
-    #     # self.get_logger().info('I heard: "%s"' % angle)
-    #     self.kit.servo[msg.channel].angle = angle
+    def listener_callback(self, msg):
+        angle = float(msg.angle) + 90
+
+        if (angle < param_min.value):
+            angle = param_min.value
+
+        if (angle > param_max.value):
+            angle = param_max.value
+
+        msg = ServoPosition()
+        msg.channel = param_channel.value
+        msg.angle = angle
+
+        self.get_logger().info('%s sent channel: %d angle: %f' % self_name,  param_channel, angle)
+        self.publisher_.publish(msg)
 
 def myFun(*argv):
     for arg in argv:

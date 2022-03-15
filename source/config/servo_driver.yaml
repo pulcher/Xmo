@@ -2,8 +2,6 @@ servo_driver_node:
   ros__parameters:
     number_channels: 16
     subscription_nodes: [
-      steering,
-      thottle
+      lf_steer_node_pub,
+      lf_drive_node_pub
     ]
-
-  

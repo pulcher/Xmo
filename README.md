@@ -94,3 +94,5 @@ and Preference to this link https://medium.com/@mikejohanson/running-docker-ce-i
 [YAML for parameters](https://roboticsbackend.com/ros2-yaml-params/#From_a_launch_file)
 
 [Naming Conventions](https://pep8.org/#prescriptive-naming-conventions)
+
+[ROS2 Node documentation](https://docs.ros2.org/foxy/api/rclpy/api/node.html)

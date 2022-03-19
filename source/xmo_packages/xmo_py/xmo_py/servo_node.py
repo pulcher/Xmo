@@ -2,7 +2,7 @@ from ast import Subscript
 import rclpy
 from rclpy.node import Node
 
-from xmo_interfaces.msg import ServoPosition
+from xmo_interfaces.msg import ServoPosition, ServoChannelPosition
 
 
 class ServoNode(Node):
@@ -22,24 +22,24 @@ class ServoNode(Node):
                 ('subscription_nodes', ['test'])
             ])
 
-        self_name = self.get_name()
-        param_channel = self.get_parameter('channel')
-        param_servo_type = self.get_parameter('servo_type')
-        param_min = self.get_parameter('min')
-        param_max = self.get_parameter('max')
-        param_neutral = self.get_parameter("neutral")
-        param_subscription_nodes = self.get_parameter('subscription_nodes',)
+        self.self_name = self.get_name()
+        self.param_channel = self.get_parameter('channel')
+        self.param_servo_type = self.get_parameter('servo_type')
+        self.param_min = self.get_parameter('min')
+        self.param_max = self.get_parameter('max')
+        self.param_neutral = self.get_parameter("neutral")
+        self.param_subscription_nodes = self.get_parameter('subscription_nodes',)
 
-        if (param_channel.value < 0):
+        if (self.param_channel.value < 0):
             raise Exception("Sorry, no channels below zero")
 
-        if not param_servo_type.value in self.servo_types:
+        if not self.param_servo_type.value in self.servo_types:
             raise Exception("Invalid servo type specificed")
 
-        publishing_topic = self_name + '_pub'
-        self.create_publisher(ServoPosition, publishing_topic, 10)
+        publishing_topic = self.self_name + '_pub'
+        self.publish_ = self.create_publisher(ServoChannelPosition, publishing_topic, 10)
 
-        for topicName in param_subscription_nodes.value:
+        for topicName in self.param_subscription_nodes.value:
             self.subscription = self.create_subscription(
                 ServoPosition,
                 topicName,
@@ -48,25 +48,25 @@ class ServoNode(Node):
         self.subscription  # prevent unused variable warning
 
         self.get_logger().info("self_name: %s, channel: %d, servo_type: %s" %
-                           (self_name,
-                            param_channel.value,
-                            str(param_servo_type.value),))
+                           (self.self_name,
+                            self.param_channel.value,
+                            str(self.param_servo_type.value),))
 
     def listener_callback(self, msg):
-        angle = float(msg.angle) + 90
+        angle = float(msg.angle) + 90.0
 
-        if (angle < param_min.value):
-            angle = param_min.value
+        if (angle < self.param_min.value):
+            angle = float(self.param_min.value)
 
-        if (angle > param_max.value):
-            angle = param_max.value
+        if (angle > self.param_max.value):
+            angle = float(self.param_max.value)
 
-        msg = ServoPosition()
-        msg.channel = param_channel.value
+        msg = ServoChannelPosition()
+        msg.channel = self.param_channel.value
         msg.angle = angle
 
-        self.get_logger().info('%s sent channel: %d angle: %f' % self_name,  param_channel, angle)
-        self.publisher_.publish(msg)
+        self.get_logger().info("%s sent channel: %d angle: %f" % (self.self_name,  self.param_channel.value, angle))
+        self.publish_.publish(msg)
 
 def myFun(*argv):
     for arg in argv:

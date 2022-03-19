@@ -6,7 +6,7 @@ lf_steer_node:
     max: 180
     neutral: 90
     subscription_nodes: [
-      cmd_servo
+      ackerman_drive_lf_steer_node_pub
     ]
 lf_drive_node:
   ros__parameters:
@@ -16,6 +16,6 @@ lf_drive_node:
     max: 180
     neutral: 90
     subscription_nodes: [
-      cmd_servo
+      ackerman_drive_lf_drive_node_pub
     ]
   

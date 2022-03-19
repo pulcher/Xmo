@@ -16,6 +16,7 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Num.msg"
   "msg/ServoPosition.msg"
+  "msg/ServoChannelPosition.msg"
   "srv/AddThreeInts.srv"
   "srv/GetConfiguration.srv"
 )

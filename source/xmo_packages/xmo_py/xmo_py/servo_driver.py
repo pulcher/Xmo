@@ -3,7 +3,7 @@ import rclpy
 from rclpy.node import Node
 from adafruit_servokit import ServoKit
 
-from xmo_interfaces.msg import ServoPosition
+from xmo_interfaces.msg import ServoChannelPosition
 
 
 class ServoDriver(Node):
@@ -23,7 +23,7 @@ class ServoDriver(Node):
 
         for topicName in param_subscription_nodes.value:
             self.subscription = self.create_subscription(
-                ServoPosition,
+                ServoChannelPosition,
                 topicName,
                 self.listener_callback,
                 10)
@@ -38,7 +38,7 @@ class ServoDriver(Node):
 
     def listener_callback(self, msg):
         angle = float(msg.angle)
-        # self.get_logger().info('I heard: "%s"' % angle)
+        self.get_logger().info('I heard: "%s"' % angle)
         self.kit.servo[msg.channel].angle = angle
 
 

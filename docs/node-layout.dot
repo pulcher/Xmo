@@ -14,17 +14,15 @@ digraph xmo {
 
     joy_node -> behavior_node
 
-    behavior_node -> teleop_twist_node
+    behavior_node -> drive_mode_node
 
-    teleop_twist_node -> driver_node
+    drive_mode_node -> ackerman_drive_node
+    drive_mode_node -> spin_math_node
+    drive_mode_node -> crab_math_node
 
-    driver_node -> ackerman_math_node
-    driver_node -> spin_math_node
-    driver_node -> crab_math_node
-
-    ackerman_math_node -> servo_node_0
-    ackerman_math_node -> servo_node_1
-    ackerman_math_node -> servo_node_2
+    ackerman_drive_node -> servo_node_0
+    ackerman_drive_node -> servo_node_1
+    ackerman_drive_node -> servo_node_2
 
     spin_math_node -> servo_node_0
     spin_math_node -> servo_node_1

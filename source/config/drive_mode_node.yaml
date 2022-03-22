@@ -1,0 +1,7 @@
+ackerman_drive_node:
+  ros__parameters:
+    publish_nodes: [
+      lf_steer_node,
+      lf_drive_node
+    ]
+  

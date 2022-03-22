@@ -17,20 +17,20 @@ digraph xmo {
     behavior_node -> drive_mode_node
 
     drive_mode_node -> ackerman_drive_node
-    drive_mode_node -> spin_math_node
-    drive_mode_node -> crab_math_node
+    drive_mode_node -> spin_drive_node
+    drive_mode_node -> crab_drive_node
 
     ackerman_drive_node -> servo_node_0
     ackerman_drive_node -> servo_node_1
     ackerman_drive_node -> servo_node_2
 
-    spin_math_node -> servo_node_0
-    spin_math_node -> servo_node_1
-    spin_math_node -> servo_node_2
+    spin_drive_node -> servo_node_0
+    spin_drive_node -> servo_node_1
+    spin_drive_node -> servo_node_2
 
-    crab_math_node -> servo_node_0
-    crab_math_node -> servo_node_1
-    crab_math_node -> servo_node_2
+    crab_drive_node -> servo_node_0
+    crab_drive_node -> servo_node_1
+    crab_drive_node -> servo_node_2
 
     servo_driver[label="servo_driver\nparams:\l\n[nodes_names_to_subscribe]\r\nnumber_channels\r\n"]
     servo_node_0 -> servo_driver

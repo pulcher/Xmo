@@ -23,6 +23,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'ackerman_drive_node = xmo_py.ackerman_drive_node:main',
             'servo_driver = xmo_py.servo_driver:main',
             'servo_node = xmo_py.servo_node:main'
         ],

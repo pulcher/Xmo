@@ -1,3 +1,4 @@
+from ntpath import join
 import os
 from ament_index_python.packages import get_package_share_directory
 from http.server import executable
@@ -15,6 +16,12 @@ servo_node_config = os.path.join(
     get_package_share_directory('xmo_py'),
         'config',
         'servo_node.yaml'
+    )
+
+drive_node_config = os.path.join(
+    get_package_share_directory('xmo_py'),
+        'config',
+        'drive_mode_node.yaml'
     )
 
 def generate_launch_description():
@@ -63,5 +70,11 @@ def generate_launch_description():
             executable='servo_node',
             name='lf_drive_node',
             parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='ackerman_drive_node',
+            name='ackerman_drive_node',
+            parameters=[drive_node_config]
         )
     ])

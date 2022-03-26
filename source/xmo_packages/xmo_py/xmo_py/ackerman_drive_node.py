@@ -36,38 +36,17 @@ class AckermanNode(Node):
                  10)
         self.subscription  # prevent unused variable warning
 
-
-        # for topicName in self.param_subscription_nodes.value:
-        #     self.subscription = self.create_subscription(
-        #         ServoPosition,
-        #         topicName,
-        #         self.listener_callback,
-        #         10)
-        # self.subscription  # prevent unused variable warning
-
-        # self.get_logger().info("self_name: %s, channel: %d, servo_type: %s" %
-        #                    (self.self_name,
-        #                     self.param_channel.value,
-        #                     str(self.param_servo_type.value),))
-
     def listener_callback(self, msg):
-    #     angle = float(msg.angle) + 90.0
+        send_servo_msg(self, "lf_steer_node", msg.angular.x)
+        send_servo_msg(self, "lf_drive_node", msg.angular.y)
 
-    #     if (angle < self.param_min.value):
-    #         angle = float(self.param_min.value)
+    def send_servo_msg(self, topic_name, angle):
+            pub_msg = ServoPosition()
+            pub_msg.angle = angle
 
-    #     if (angle > self.param_max.value):
-    #         angle = float(self.param_max.value)
-        pub_msg = ServoPosition()
-        pub_msg.angle = msg.angular.x
-
-        self.get_logger().info("%s sent servo_node: %s angle: %f" % (self.self_name, "lf_steer_node",  pub_msg.angle))
-        publisher = self.publishDictionary_.get("lf_steer_node")
-        publisher.publish(pub_msg)
-
-def myFun(*argv):
-    for arg in argv:
-        print (arg)
+            self.get_logger().info("%s sent servo_node: %s angle: %f" % (self.self_name, topic_name,  pub_msg.angle))
+            publisher = self.publishDictionary_.get(topic_name)
+            publisher.publish(pub_msg)
 
 def main(args=None):
     rclpy.init(args=args)

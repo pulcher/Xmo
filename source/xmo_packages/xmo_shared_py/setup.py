@@ -1,24 +1,15 @@
-import os
-from glob import glob
 from setuptools import setup
-from catkin_pkg.python_setup import generate_distutils_setup
 
-package_name = 'xmo_py'
-
-d = generate_distutils_setup(
-    packages=['xmo_py_shared'],
-    package_dir={'': 'src'}
-)
+package_name = 'xmo_shared_py'
 
 setup(
     name=package_name,
-    version='0.0.1',
+    version='0.0.0',
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name, 'config'), glob('../../config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -29,9 +20,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'ackerman_drive_node = xmo_py.ackerman_drive_node:main',
-            'servo_driver = xmo_py.servo_driver:main',
-            'servo_node = xmo_py.servo_node:main'
         ],
     },
 )

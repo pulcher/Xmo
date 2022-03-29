@@ -6,7 +6,7 @@ from catkin_pkg.python_setup import generate_distutils_setup
 package_name = 'xmo_py'
 
 d = generate_distutils_setup(
-    packages=['xmo_py_shared'],
+    packages=['xmo_shared_py'],
     package_dir={'': 'src'}
 )
 

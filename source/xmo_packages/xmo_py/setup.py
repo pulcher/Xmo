@@ -1,8 +1,14 @@
 import os
 from glob import glob
 from setuptools import setup
+from catkin_pkg.python_setup import generate_distutils_setup
 
 package_name = 'xmo_py'
+
+d = generate_distutils_setup(
+    packages=['xmo_shared_py'],
+    package_dir={'': 'src'}
+)
 
 setup(
     name=package_name,

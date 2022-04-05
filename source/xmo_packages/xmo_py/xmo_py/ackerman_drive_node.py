@@ -4,6 +4,7 @@ from rclpy.node import Node
 
 from xmo_interfaces.msg import ServoPosition
 from geometry_msgs.msg import Twist
+from xmo_shared_py.servo_names import ServoNames
 
 
 class AckermanNode(Node):
@@ -37,8 +38,15 @@ class AckermanNode(Node):
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
-        send_servo_msg(self, "lf_steer_node", msg.angular.x)
-        send_servo_msg(self, "lf_drive_node", msg.angular.y)
+        # left side
+        self.send_servo_msg(self, ServoNames.lf_steer_node, msg.angular.x)
+        self.send_servo_msg(self, ServoNames.lf_drive_node, msg.angular.y)
+        self.send_servo_msg(self, ServoNames.lm_steer_node, msg.angular.x)
+        self.send_servo_msg(self, ServoNames.lm_drive_node, msg.angular.y)
+        self.send_servo_msg(self, ServoNames.lr_steer_node, msg.angular.x)
+        self.send_servo_msg(self, ServoNames.lr_drive_node, msg.angular.y)
+
+        # right side
 
     def send_servo_msg(self, topic_name, angle):
             pub_msg = ServoPosition()

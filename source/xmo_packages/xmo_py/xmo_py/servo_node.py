@@ -65,7 +65,7 @@ class ServoNode(Node):
         msg.channel = self.param_channel.value
         msg.angle = angle
 
-        self.get_logger().info("%s sent channel: %d angle: %f" % (self.self_name,  self.param_channel.value, angle))
+        # self.get_logger().info("%s sent channel: %d angle: %f" % (self.self_name,  self.param_channel.value, angle))
         self.publish_.publish(msg)
 
 def myFun(*argv):

@@ -38,7 +38,7 @@ class ServoDriver(Node):
 
     def listener_callback(self, msg):
         angle = float(msg.angle)
-        self.get_logger().info('I heard: "%s"' % angle)
+        # self.get_logger().info('I heard: "%s"' % angle)
         self.kit.servo[msg.channel].angle = angle
 
 

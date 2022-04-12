@@ -73,6 +73,66 @@ def generate_launch_description():
         ),
         Node(
             package='xmo_py',
+            executable='servo_node',
+            name='rf_steer_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='rf_drive_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='lm_steer_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='lm_drive_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='rm_steer_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='rm_drive_node',
+            parameters=[servo_node_config]
+        ),        
+                Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='lr_steer_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='lr_drive_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='rr_steer_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='rr_drive_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
             executable='ackerman_drive_node',
             name='ackerman_drive_node',
             parameters=[drive_node_config]

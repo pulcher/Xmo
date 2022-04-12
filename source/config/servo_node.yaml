@@ -1,6 +1,6 @@
 lf_steer_node:
   ros__parameters:
-    channel: 0
+    channel: 11
     servo_type: standard
     min: 0
     max: 180
@@ -10,7 +10,7 @@ lf_steer_node:
     ]
 lf_drive_node:
   ros__parameters:
-    channel: 1
+    channel: 8
     servo_type: continuous
     min: 0
     max: 180
@@ -18,4 +18,123 @@ lf_drive_node:
     subscription_nodes: [
       ackerman_drive_node_lf_drive_node_pub
     ]
-  
+lm_steer_node:
+  ros__parameters:
+    channel: 10
+    servo_type: standard
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_lm_steer_node_pub
+    ]
+lm_drive_node:
+  ros__parameters:
+    channel: 9
+    servo_type: continuous
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_lm_drive_node_pub
+    ]
+lr_steer_node:
+  ros__parameters:
+    channel: 6
+    servo_type: standard
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_lr_steer_node_pub
+    ]
+lr_drive_node:
+  ros__parameters:
+    channel: 5
+    servo_type: continuous
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_lr_drive_node_pub
+    ]
+rf_steer_node:
+  ros__parameters:
+    channel: 1
+    servo_type: standard
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_rf_steer_node_pub
+    ]
+rf_drive_node:
+  ros__parameters:
+    channel: 3
+    servo_type: continuous
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_rf_drive_node_pub
+    ]
+rm_steer_node:
+  ros__parameters:
+    channel: 0
+    servo_type: standard
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_rm_steer_node_pub
+    ]
+rm_drive_node:
+  ros__parameters:
+    channel: 2
+    servo_type: continuous
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_rm_drive_node_pub
+    ]
+rr_steer_node:
+  ros__parameters:
+    channel: 4
+    servo_type: standard
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_rm_steer_node_pub
+    ]
+rr_drive_node:
+  ros__parameters:
+    channel: 7
+    servo_type: continuous
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_rm_drive_node_pub
+    ]    
+camera_x_node:
+  ros__parameters:
+    channel: 12
+    servo_type: standard
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_camera_x_node_pub
+    ]
+camera_y_node:
+  ros__parameters:
+    channel: 13
+    servo_type: standard
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      ackerman_drive_node_camera_y_node_pub
+    ]

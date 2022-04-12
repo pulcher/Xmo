@@ -3,5 +3,17 @@ servo_driver_node:
     number_channels: 16
     subscription_nodes: [
       lf_steer_node_pub,
-      lf_drive_node_pub
+      lf_drive_node_pub,
+      lm_steer_node_pub,
+      lm_drive_node_pub,
+      lr_steer_node_pub,
+      lr_drive_node_pub,
+      rf_steer_node_pub,
+      rf_drive_node_pub,
+      rm_steer_node_pub,
+      rm_drive_node_pub,
+      rr_steer_node_pub,
+      rr_drive_node_pub,
+      camera_x_pub,    
+      camera_y_pub     
     ]

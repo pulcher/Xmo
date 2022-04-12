@@ -39,14 +39,20 @@ class AckermanNode(Node):
 
     def listener_callback(self, msg):
         # left side
-        self.send_servo_msg(self, ServoNames.lf_steer_node, msg.angular.x)
-        self.send_servo_msg(self, ServoNames.lf_drive_node, msg.angular.y)
-        self.send_servo_msg(self, ServoNames.lm_steer_node, msg.angular.x)
-        self.send_servo_msg(self, ServoNames.lm_drive_node, msg.angular.y)
-        self.send_servo_msg(self, ServoNames.lr_steer_node, msg.angular.x)
-        self.send_servo_msg(self, ServoNames.lr_drive_node, msg.angular.y)
+        self.send_servo_msg(ServoNames.lf_steer_node, msg.angular.x)
+        self.send_servo_msg(ServoNames.lf_drive_node, msg.angular.y)
+        self.send_servo_msg(ServoNames.lm_steer_node, msg.angular.x)
+        self.send_servo_msg(ServoNames.lm_drive_node, msg.angular.y)
+        self.send_servo_msg(ServoNames.lr_steer_node, msg.angular.x)
+        self.send_servo_msg(ServoNames.lr_drive_node, msg.angular.y)
 
         # right side
+        self.send_servo_msg(ServoNames.rf_steer_node, msg.angular.x)
+        self.send_servo_msg(ServoNames.rf_drive_node, msg.angular.y)
+        self.send_servo_msg(ServoNames.rm_steer_node, msg.angular.x)
+        self.send_servo_msg(ServoNames.rm_drive_node, msg.angular.y)
+        self.send_servo_msg(ServoNames.rr_steer_node, msg.angular.x)
+        self.send_servo_msg(ServoNames.rr_drive_node, msg.angular.y)
 
     def send_servo_msg(self, topic_name, angle):
             pub_msg = ServoPosition()

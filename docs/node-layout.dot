@@ -37,5 +37,6 @@ digraph xmo {
     servo_node_1 -> servo_driver
     servo_node_2 -> servo_driver
 
+    configuration -> servo_node_0
     ui_node -> servo_node_0
 }

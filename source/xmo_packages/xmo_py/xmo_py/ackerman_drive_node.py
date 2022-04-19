@@ -38,20 +38,29 @@ class AckermanNode(Node):
                  10)
         self.subscription  # prevent unused variable warning
 
+        # Set the min and max radius for the robot in millimeters
+        self.radius_min = 110
+        self.radius_max = 9166
+
+
     async def listener_callback(self, msg):
         # left side
-        await self.send_servo_msg(ServoNames.lf_steer_node, msg.angular.x)
-        await self.send_servo_msg(ServoNames.lf_drive_node, msg.angular.y)
-        await self.send_servo_msg(ServoNames.lm_steer_node, msg.angular.x)
-        await self.send_servo_msg(ServoNames.lm_drive_node, msg.angular.y)
-        await self.send_servo_msg(ServoNames.lr_steer_node, msg.angular.x)
-        await self.send_servo_msg(ServoNames.lr_drive_node, msg.angular.y)
 
-        # right side
+        # front wheel steering angles
+        await self.send_servo_msg(ServoNames.lf_steer_node, msg.angular.x)
+        await self.send_servo_msg(ServoNames.lf_drive_node, -msg.angular.y)
         await self.send_servo_msg(ServoNames.rf_steer_node, msg.angular.x)
         await self.send_servo_msg(ServoNames.rf_drive_node, msg.angular.y)
+
+        # no change for the middle steering angles
+        await self.send_servo_msg(ServoNames.lm_steer_node, msg.angular.x)
+        await self.send_servo_msg(ServoNames.lm_drive_node, -msg.angular.y)
         await self.send_servo_msg(ServoNames.rm_steer_node, msg.angular.x)
         await self.send_servo_msg(ServoNames.rm_drive_node, msg.angular.y)
+
+        # rear wheel steering angles
+        await self.send_servo_msg(ServoNames.lr_steer_node, msg.angular.x)
+        await self.send_servo_msg(ServoNames.lr_drive_node, -msg.angular.y)
         await self.send_servo_msg(ServoNames.rr_steer_node, msg.angular.x)
         await self.send_servo_msg(ServoNames.rr_drive_node, msg.angular.y)
 

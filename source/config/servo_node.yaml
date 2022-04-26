@@ -106,7 +106,7 @@ rr_steer_node:
     max: 180
     neutral: 90
     subscription_nodes: [
-      ackerman_drive_node_rm_steer_node_pub
+      ackerman_drive_node_rr_steer_node_pub
     ]
 rr_drive_node:
   ros__parameters:
@@ -116,7 +116,7 @@ rr_drive_node:
     max: 180
     neutral: 90
     subscription_nodes: [
-      ackerman_drive_node_rm_drive_node_pub
+      ackerman_drive_node_rr_drive_node_pub
     ]    
 camera_x_node:
   ros__parameters:

@@ -39,6 +39,9 @@ class AckermanNode(Node):
                  10)
         self.subscription  # prevent unused variable warning
 
+        # setup the wheel_angle dictionary
+        self.wheel_angles = dict()      # new empty dictionary
+
         # set some physical values
         self.wheel_center_to_drive_center = 160
         self.wheel_center_width = 220
@@ -50,9 +53,94 @@ class AckermanNode(Node):
 
     async def listener_callback(self, msg):
 
-        if msg.angular.x != 0.0:
+        self.calc_servo_angles(msg.angular)
 
-            denominator_2 = self.wheel_center_to_drive_center/math.tan(math.radians(msg.angular.x))
+        # front wheel steering
+        await self.send_servo_msg(ServoNames.lf_steer_node)
+        await self.send_servo_msg(ServoNames.rf_steer_node)
+
+        await self.send_servo_msg(ServoNames.lf_drive_node)
+        await self.send_servo_msg(ServoNames.rf_drive_node)
+
+        # middle wheel steering
+        await self.send_servo_msg(ServoNames.lm_steer_node)
+        await self.send_servo_msg(ServoNames.rm_steer_node)
+
+        await self.send_servo_msg(ServoNames.lm_drive_node)
+        await self.send_servo_msg(ServoNames.rm_drive_node)
+
+        # rear wheel steering
+        await self.send_servo_msg(ServoNames.lr_steer_node)
+        await self.send_servo_msg(ServoNames.rr_steer_node)
+
+        await self.send_servo_msg(ServoNames.lr_drive_node)
+        await self.send_servo_msg(ServoNames.rr_drive_node)
+
+    async def send_servo_msg(self, topic_name):
+        pub_msg = ServoPosition()
+        pub_msg.angle = self.get_servo_angle(topic_name)
+
+        # self.get_logger().info("%s sent servo_node: %s angle: %f" % (self.self_name, topic_name,  pub_msg.angle))
+        publisher = self.publishDictionary_.get(topic_name)
+        publisher.publish(pub_msg)
+
+    def calc_servo_angles(self, vector_message):
+        # which is the inside?
+        inside_wheel = self.calc_inside_wheel_angle(vector_message.x)
+
+        if vector_message.x < 0.0:
+            self.calc_turn_left(vector_message, inside_wheel)
+        else:
+            self.calc_turn_right(vector_message, inside_wheel)             
+    
+    def get_servo_angle(self, servo_node_name):
+        return self.wheel_angles.get(servo_node_name, 0.00)     # if it isn't in the dictionary got neutral
+
+    def calc_turn_left(self, vector_message, inside_wheel_angle):
+        # calculate the steering angles
+        self.wheel_angles[ServoNames.lf_steer_node] = vector_message.x
+        self.wheel_angles[ServoNames.rf_steer_node] = inside_wheel_angle
+
+        self.wheel_angles[ServoNames.lm_steer_node] = 0.0
+        self.wheel_angles[ServoNames.rm_steer_node] = 0.0
+        
+        self.wheel_angles[ServoNames.lr_steer_node] = -vector_message.x
+        self.wheel_angles[ServoNames.rr_steer_node] = -inside_wheel_angle
+
+        # calculate the drive wheel angles
+        self.wheel_angles[ServoNames.lf_drive_node] = -vector_message.y
+        self.wheel_angles[ServoNames.lm_drive_node] = -vector_message.y
+        self.wheel_angles[ServoNames.lr_drive_node] = -vector_message.y
+
+        self.wheel_angles[ServoNames.rf_drive_node] = vector_message.y
+        self.wheel_angles[ServoNames.rm_drive_node] = vector_message.y
+        self.wheel_angles[ServoNames.rr_drive_node] = vector_message.y   
+
+    def calc_turn_right(self, vector_message, inside_wheel_angle):
+        # calculate the steering angles
+        self.wheel_angles[ServoNames.lf_steer_node] = vector_message.x
+        self.wheel_angles[ServoNames.rf_steer_node] = inside_wheel_angle
+
+        self.wheel_angles[ServoNames.lm_steer_node] = 0.0
+        self.wheel_angles[ServoNames.rm_steer_node] = 0.0
+
+        self.wheel_angles[ServoNames.lr_steer_node] = -vector_message.x
+        self.wheel_angles[ServoNames.rr_steer_node] = -inside_wheel_angle
+
+        # calculate the drive wheel angles
+        self.wheel_angles[ServoNames.lf_drive_node] = -vector_message.y
+        self.wheel_angles[ServoNames.lm_drive_node] = -vector_message.y
+        self.wheel_angles[ServoNames.lr_drive_node] = -vector_message.y
+
+        self.wheel_angles[ServoNames.rf_drive_node] = vector_message.y
+        self.wheel_angles[ServoNames.rm_drive_node] = vector_message.y
+        self.wheel_angles[ServoNames.rr_drive_node] = vector_message.y 
+
+    def calc_inside_wheel_angle(self, outside_angle):
+        # this is all going in the calc_wheel_angles method
+        if outside_angle != 0.0:
+
+            denominator_2 = self.wheel_center_to_drive_center/math.tan(math.radians(outside_angle))
 
             # generate the inside angle from the joystick angle
             denominator = denominator_2 - self.wheel_center_width
@@ -60,37 +148,12 @@ class AckermanNode(Node):
             inside_angle =  math.degrees(math.atan( self.wheel_center_to_drive_center/denominator ))
 
             self.get_logger().info("angle: %f, tan: %f, denominator: %f, denominator_2: %f, inside_angle: %f" %
-                    (msg.angular.x, math.tan(msg.angular.x), denominator, denominator_2, inside_angle))
+                    (outside_angle, math.tan(outside_angle), denominator, denominator_2, inside_angle))
 
         else:
-            inside_angle = msg.angular.x
+            inside_angle = outside_angle
 
-        # front wheel steering angles
-        await self.send_servo_msg(ServoNames.lf_steer_node, msg.angular.x)
-        await self.send_servo_msg(ServoNames.rf_steer_node, inside_angle)
-
-        await self.send_servo_msg(ServoNames.lf_drive_node, -msg.angular.y)
-        await self.send_servo_msg(ServoNames.rf_drive_node, msg.angular.y)
-
-        # no change for the middle steering angles
-        await self.send_servo_msg(ServoNames.lm_steer_node, msg.angular.x)
-        await self.send_servo_msg(ServoNames.lm_drive_node, -msg.angular.y)
-        await self.send_servo_msg(ServoNames.rm_steer_node, msg.angular.x)
-        await self.send_servo_msg(ServoNames.rm_drive_node, msg.angular.y)
-
-        # rear wheel steering angles
-        await self.send_servo_msg(ServoNames.lr_steer_node, msg.angular.x)
-        await self.send_servo_msg(ServoNames.lr_drive_node, -msg.angular.y)
-        await self.send_servo_msg(ServoNames.rr_steer_node, msg.angular.x)
-        await self.send_servo_msg(ServoNames.rr_drive_node, msg.angular.y)
-
-    async def send_servo_msg(self, topic_name, angle):
-            pub_msg = ServoPosition()
-            pub_msg.angle = angle
-
-            # self.get_logger().info("%s sent servo_node: %s angle: %f" % (self.self_name, topic_name,  pub_msg.angle))
-            publisher = self.publishDictionary_.get(topic_name)
-            publisher.publish(pub_msg)
+        return inside_angle
 
 def main(args=None):
     rclpy.init(args=args)

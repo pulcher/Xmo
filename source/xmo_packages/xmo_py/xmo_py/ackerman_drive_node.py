@@ -86,7 +86,7 @@ class AckermanNode(Node):
 
     def calc_servo_angles(self, vector_message):
         # which is the inside?
-        inside_wheel = self.calc_inside_wheel_angle(vector_message.x)
+        inside_wheel = self.calc_inside_wheel_angle(0 - abs(vector_message.x))
 
         if vector_message.x < 0.0:
             self.calc_turn_left(vector_message, inside_wheel)
@@ -118,14 +118,14 @@ class AckermanNode(Node):
 
     def calc_turn_right(self, vector_message, inside_wheel_angle):
         # calculate the steering angles
-        self.wheel_angles[ServoNames.lf_steer_node] = vector_message.x
-        self.wheel_angles[ServoNames.rf_steer_node] = inside_wheel_angle
+        self.wheel_angles[ServoNames.lf_steer_node] = -inside_wheel_angle
+        self.wheel_angles[ServoNames.rf_steer_node] = vector_message.x
 
         self.wheel_angles[ServoNames.lm_steer_node] = 0.0
         self.wheel_angles[ServoNames.rm_steer_node] = 0.0
 
-        self.wheel_angles[ServoNames.lr_steer_node] = -vector_message.x
-        self.wheel_angles[ServoNames.rr_steer_node] = -inside_wheel_angle
+        self.wheel_angles[ServoNames.lr_steer_node] = inside_wheel_angle
+        self.wheel_angles[ServoNames.rr_steer_node] = -vector_message.x
 
         # calculate the drive wheel angles
         self.wheel_angles[ServoNames.lf_drive_node] = -vector_message.y
@@ -148,7 +148,7 @@ class AckermanNode(Node):
             inside_angle =  math.degrees(math.atan( self.wheel_center_to_drive_center/denominator ))
 
             self.get_logger().info("angle: %f, tan: %f, denominator: %f, denominator_2: %f, inside_angle: %f" %
-                    (outside_angle, math.tan(outside_angle), denominator, denominator_2, inside_angle))
+                    (outside_angle, math.tan(math.radians(outside_angle)), denominator, denominator_2, inside_angle))
 
         else:
             inside_angle = outside_angle

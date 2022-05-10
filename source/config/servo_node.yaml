@@ -126,7 +126,7 @@ camera_x_node:
     max: 180
     neutral: 90
     subscription_nodes: [
-      ackerman_drive_node_camera_x_node_pub
+      camera_x_node_pub
     ]
 camera_y_node:
   ros__parameters:
@@ -136,5 +136,5 @@ camera_y_node:
     max: 180
     neutral: 90
     subscription_nodes: [
-      ackerman_drive_node_camera_y_node_pub
+      camera_y_node_pub
     ]

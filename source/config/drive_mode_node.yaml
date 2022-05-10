@@ -13,6 +13,10 @@ ackerman_drive_node:
       rm_drive_node,
       rr_steer_node,
       rr_drive_node,
+    ]
+camera_position_node:
+  ros__parameters:
+    publish_nodes: [
       camera_x,
       camera_y,
     ]

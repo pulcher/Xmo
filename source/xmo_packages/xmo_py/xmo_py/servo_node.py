@@ -40,6 +40,8 @@ class ServoNode(Node):
         self.publish_ = self.create_publisher(ServoChannelPosition, publishing_topic, 10)
 
         for topicName in self.param_subscription_nodes.value:
+            self.get_logger().info("creating subscription: topicName: :%s:" %
+                                (topicName))
             self.subscription = self.create_subscription(
                 ServoPosition,
                 topicName,
@@ -74,8 +76,6 @@ def myFun(*argv):
 
 def main(args=None):
     rclpy.init(args=args)
-    
-    print("blah blah blah blah")
 
     servo_node = ServoNode()
 

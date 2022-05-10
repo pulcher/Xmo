@@ -107,7 +107,7 @@ def generate_launch_description():
             name='rm_drive_node',
             parameters=[servo_node_config]
         ),        
-                Node(
+        Node(
             package='xmo_py',
             executable='servo_node',
             name='lr_steer_node',
@@ -136,5 +136,23 @@ def generate_launch_description():
             executable='ackerman_drive_node',
             name='ackerman_drive_node',
             parameters=[drive_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='camera_x_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='camera_y_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='camera_position_node',
+            name='camera_x_position_node',
+            parameters=[servo_node_config]
         )
     ])

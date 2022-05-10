@@ -17,5 +17,5 @@ class ServoNames:
     rr_steer_node = 'rr_steer_node'
     rr_drive_node = 'rr_drive_node'
     
-    camera_x      = 'camera_x'
-    camera_y      = 'camera_y'
+    camera_x_node = 'camera_x'
+    camera_y_node = 'camera_y'

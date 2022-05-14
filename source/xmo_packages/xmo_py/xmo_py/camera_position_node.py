@@ -41,7 +41,7 @@ class CameraPositionNode(Node):
 
     async def listener_callback(self, msg):
 
-        self.get_logger().info("msg.linear.x: %f, msg.linear.y: %f" % (msg.linear.x, msg.linear.y))
+        self.get_logger().debug("msg.linear.x: %f, msg.linear.y: %f" % (msg.linear.x, msg.linear.y))
         self.calc_servo_angles(msg.linear)
 
         await self.send_servo_msg(ServoNames.camera_x_node)

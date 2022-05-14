@@ -37,6 +37,7 @@ class ServoNode(Node):
             raise Exception("Invalid servo type specificed")
 
         publishing_topic = self.self_name + '_pub'
+        self.get_logger().info("servo-node: publishing_topic: %s" % (publishing_topic))
         self.publish_ = self.create_publisher(ServoChannelPosition, publishing_topic, 10)
 
         for topicName in self.param_subscription_nodes.value:
@@ -67,7 +68,7 @@ class ServoNode(Node):
         msg.channel = self.param_channel.value
         msg.angle = angle
 
-        # self.get_logger().info("%s sent channel: %d angle: %f" % (self.self_name,  self.param_channel.value, angle))
+        self.get_logger().debug("%s sent channel: %d angle: %f" % (self.self_name,  self.param_channel.value, angle))
         self.publish_.publish(msg)
 
 def myFun(*argv):

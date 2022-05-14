@@ -47,8 +47,8 @@ def generate_launch_description():
                 {'axis_linear.x': 0},
                 {'axis_linear.y': 1},
                 {'axis_linear.z': 1},
-                {'axis_angular.pitch': 3},
-                {'axis_angular.roll': 2},
+                {'axis_angular.pitch': 4},
+                {'axis_angular.roll': 3},
                 {'axis_angular.yaw': 3},
                 {'scale_linear.x': -90.0},
                 {'scale_linear.y': 90.0},
@@ -139,20 +139,20 @@ def generate_launch_description():
         ),
         Node(
             package='xmo_py',
-            executable='servo_node',
-            name='camera_x_node',
-            parameters=[servo_node_config]
-        ),
-        Node(
-            package='xmo_py',
-            executable='servo_node',
-            name='camera_y_node',
-            parameters=[servo_node_config]
-        ),
-        Node(
-            package='xmo_py',
             executable='camera_position_node',
-            name='camera_x_position_node',
+            name='camera_position_node',
+            parameters=[drive_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='camera_y_servo_node',
+            parameters=[servo_node_config]
+        ),
+        Node(
+            package='xmo_py',
+            executable='servo_node',
+            name='camera_x_servo_node',
             parameters=[servo_node_config]
         )
     ])

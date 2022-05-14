@@ -118,17 +118,7 @@ rr_drive_node:
     subscription_nodes: [
       ackerman_drive_node_rr_drive_node_pub
     ]    
-camera_x_node:
-  ros__parameters:
-    channel: 12
-    servo_type: standard
-    min: 0
-    max: 180
-    neutral: 90
-    subscription_nodes: [
-      camera_x_node_pub
-    ]
-camera_y_node:
+camera_x_servo_node:
   ros__parameters:
     channel: 13
     servo_type: standard
@@ -136,5 +126,15 @@ camera_y_node:
     max: 180
     neutral: 90
     subscription_nodes: [
-      camera_y_node_pub
+      camera_position_node_camera_x_pub
+    ]
+camera_y_servo_node:
+  ros__parameters:
+    channel: 12
+    servo_type: standard
+    min: 0
+    max: 180
+    neutral: 90
+    subscription_nodes: [
+      camera_position_node_camera_y_pub
     ]

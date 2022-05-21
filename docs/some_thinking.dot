@@ -1,0 +1,18 @@
+digraph {
+
+    f710 -> rpi
+    rpi -> teleop
+    teleop -> cmd_vel
+
+    cmd_vel -> xmo_junk
+    xmo_junk -> image
+
+    tablet -> web_page
+    web_page -> view_image
+    //tablet -> joy_stick
+
+    //joy_stick -> cmd_vel
+
+    image -> view_image
+
+}

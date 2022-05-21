@@ -15,6 +15,7 @@ RUN apt update && apt install -y \
     i2c-tools \
     libi2c-dev \
     python3-rpi.gpio \
+    v4l-utils \
     python3-pip
 
 RUN pip3 install -r requirements.txt
@@ -24,4 +25,4 @@ RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
 RUN apt update
 # RUN DEBIAN_FRONTEND=noninteractive apt install -y ros-galactic-desktop
-RUN DEBIAN_FRONTEND=noninteractive apt install -y ros-galactic-ros-base ros-galactic-teleop-twist-joy
+RUN DEBIAN_FRONTEND=noninteractive apt install -y ros-galactic-ros-base ros-galactic-teleop-twist-joy ros-galactic-image-tools

@@ -96,3 +96,11 @@ and Preference to this link https://medium.com/@mikejohanson/running-docker-ce-i
 [Naming Conventions](https://pep8.org/#prescriptive-naming-conventions)
 
 [ROS2 Node documentation](https://docs.ros2.org/foxy/api/rclpy/api/node.html)
+
+[FFMPEG Test](https://stegard.net/2021/07/capture-images-from-a-webcam-using-ffmpeg/)
+
+[Install raspi-config to enable camera](https://chuckmails.medium.com/enable-pi-camera-with-raspberry-pi4-ubuntu-20-10-327208312f6e)
+
+# some commands that need 'memberin' and doc'ed
+- capture image on Xmo: ros2 run image_tools cam2image --ros-args -p frequency:=5.0 -p reliability:=best_effort
+- show image from capture:  ros2 run image_tools showimage --ros-args -p show_image:=true -p reliability:=best_effort

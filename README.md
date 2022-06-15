@@ -4,21 +4,45 @@ My implementation based on work from the Exomy 3D printed rover project
 # Requirements
 - Raspberry Pi 4 suggest at least 4GB
 - 128 GB SD card
-- Ubuntu 20.04 LTS
+- Ubuntu 22.04 LTS
 - ROS2 Galactic 
 - Logitech F710 gamepad
 
 # Rapspberry Pi Setup
-1. Download 20.04 Server LTS https://ubuntu.com/download/raspberry-pi
+1. Download [22.04 Server LTS](https://ubuntu.com/download/raspberry-pi)
 1. Install ubuntu using the Raspberry Pi Imager.  Here is a link to the official Ubuntu site with a walk-through [How to install Ubuntu Server on your Raspberry Pi](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview). 
+   - Get the wifi online if you wish.
+      -  I edited the file /boot/firmware/network-config using the following as an example. [Getting setup with Wi-Fi](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#3-wifi-or-ethernet)
    -  I went ahead and installed the minimal desktop after getting the RPI on my local network.  Then I disabled it as it was in the way for what I wanted to accomplish.
+      ```bash
+         sudo apt install lxde-core
+      ```
    -  Make sure the **SSH** is enabled.  You will need it later if not immediately to do the next steps. 
+   - Enabled video with raspi-config
+      ```bash
+         sudo apt install raspi-config
+         sudo mount /dev/mmcblk0p1 /boot
+         sudo raspi-config
+      ```
+      After enabling the video, you should reboot the pi:
+      ```bash
+         sudo reboot
+      ```
+   - Enable UART 5 for the GPS serial communications.
+      ```bash
+         /boot/firmware/config.txt
+      ```
+      Add the following
+      ```bash
+         dtoverlay=uart5
+      ```
+
 3. Install Docker: [How to Install Docker on Raspberry Pi 4](https://linuxhint.com/install_docker_raspberry_pi-2/)
 4. Login to docker: ```$ docker login ```
 5. Build the base and the primary 
 ```
-docker build -t xmo_base:latest ~/repos/Xmo/source/docker/xmo_base
-docker build -t xmo:latest ~/repos/Xmo/source/docker/xmo
+   docker build -t xmo_base:latest ~/repos/Xmo/source/docker/xmo_base
+   docker build -t xmo:latest ~/repos/Xmo/source/docker/xmo
 ```
 
 - These should be available as a public repo on docker hub at some point in this with a release.

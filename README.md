@@ -36,6 +36,12 @@ My implementation based on work from the Exomy 3D printed rover project
       ```bash
          dtoverlay=uart5
       ```
+   - Some other stuff to install
+      ```bash
+          apt install ffmpeg
+          apt install v4l-utils
+          apt install -y i2c-tools
+      ```
 
 3. Install Docker: [How to Install Docker on Raspberry Pi 4](https://linuxhint.com/install_docker_raspberry_pi-2/)
 4. Login to docker: ```$ docker login ```

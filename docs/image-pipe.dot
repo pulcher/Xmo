@@ -1,0 +1,21 @@
+digraph {
+    topic_image;
+
+    topic_image -> recognizer
+
+    topic_image -> combine_image
+
+    topic_image -> navigation_by_image
+
+    recognizer -> topic_recognizer
+
+    topic_recognizer -> combine_image
+
+    combine_image -> web_page
+
+    web_page -> really_cool_hugo_user
+
+    topic_recognizer -> navigation_by_image
+
+    navigation_by_image -> cmd_vel
+}

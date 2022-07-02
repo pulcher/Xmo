@@ -16,6 +16,7 @@ RUN apt update && apt install -y \
     libi2c-dev \
     python3-rpi.gpio \
     v4l-utils \
+    ffmpeg \
     python3-pip
 
 RUN pip3 install -r requirements.txt

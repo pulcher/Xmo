@@ -4,7 +4,10 @@ ENV LC_ALL C.UTF-8
 ENV ROS_DOMAIN_ID 27
 
 COPY ./requirements.txt .
-RUN apt update && apt install -y \
+RUN apt update && \
+    DEBIAN_FRONTEND=noninteractive \
+    TZ=America/Chicago \
+    apt install -y \
     curl \
     gnupg2 \
     lsb-release \

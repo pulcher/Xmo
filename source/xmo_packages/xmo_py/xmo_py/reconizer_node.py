@@ -3,11 +3,20 @@ import math
 from ast import Subscript
 import rclpy
 from rclpy.node import Node
+import json
+import os
+import io
 
+# ROS2 Stuff
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image
 from std_msgs.msg import String, Header
 
+# Image recognizer
+from PIL import Image
+
+# Imports for prediction
+from predict import initialize, predict_image
 
 class RecognizerNode(Node):
 
@@ -41,8 +50,11 @@ class RecognizerNode(Node):
         message = "msg.encoding: %s" % (msg.encoding)
         self.get_logger().debug(message)
         
+        img = Image.open(msg.data)
+        results = predict_image(img)
+
         pub_msg = String()
-        pub_msg.data = message
+        pub_msg.data = jsonify(results) #message
         
         publisher = self.publishDictionary_.get("bounding_box")
         publisher.publish(pub_msg)

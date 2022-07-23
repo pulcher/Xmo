@@ -4,3 +4,7 @@ adafruit-circuitpython-servokit
 smbus
 smbus2
 requests
+keras_applications
+keras_preprocessing
+numpy
+tensorflow-aarch64
